@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\GrassController;
 
 use App\Http\Controllers\Admin\{
+    AdminGrassController,
     PostController,
     GrassTypeController,
-    GrassController,
     ContactMessageController,
     UserController,
     DashboardController
@@ -36,6 +37,10 @@ Route::post('/contact', [ContactFormController::class, 'submit'])->name('contact
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
+// Grass routes
+Route::get('/grass', [GrassController::class, 'index'])->name('grass.index');
+Route::get('/grass/{slug}', [GrassController::class, 'show'])->name('grass.show');
+
 
 
 
@@ -50,7 +55,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::resource('posts', PostController::class);
     Route::resource('grass-types', GrassTypeController::class);
-    Route::resource('grasses', GrassController::class);
+    Route::resource('grasses', AdminGrassController::class);
     Route::resource('messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);
     Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'destroy']);
 });

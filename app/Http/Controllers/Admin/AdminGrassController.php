@@ -7,7 +7,7 @@ use App\Models\GrassType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class GrassController extends Controller
+class AdminGrassController extends Controller
 {
     public function index()
     {
