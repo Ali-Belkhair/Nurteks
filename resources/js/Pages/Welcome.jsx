@@ -1,0 +1,127 @@
+import GuestLayout from '@/Layouts/GuestLayout'
+import { Link } from '@inertiajs/react'
+
+export default function Welcome() {
+  return (
+    <GuestLayout>
+      {/* Hero Section */}
+      <section className="bg-[url('/images/hero-grass.jpg')] bg-cover bg-center text-white py-24 px-4">
+        <div className="max-w-4xl mx-auto text-center bg-black/60 p-6 rounded-lg">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Artificial Grass, Reimagined for Morocco</h1>
+          <p className="text-lg mb-6">Premium quality from a global leader. Perfect for homes, sports fields, and urban decor.</p>
+          <Link
+            href="/contact"
+            className="inline-block bg-primary text-white px-6 py-3 rounded-md hover:bg-green-700 transition"
+          >
+            Contact Us
+          </Link>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-16 px-6 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4 text-primary">About Nurteks Morocco</h2>
+          <p className="text-gray-600">
+            We are the official Moroccan franchise of <strong>Nurteks</strong>, one of the leading artificial grass manufacturers in the world. With 20+ years of global experience, we deliver innovative and sustainable turf solutions for all uses.
+          </p>
+        </div>
+      </section>
+
+      {/* Product Highlights */}
+      <section className="py-16 px-6 bg-gray-50">
+        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">Our Grass Types</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-white shadow rounded-lg overflow-hidden">
+              <img src={`/images/grass${i}.jpg`} alt={`Grass ${i}`} className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="font-semibold text-lg mb-2">Landscape Grass {i}</h3>
+                <p className="text-sm text-gray-600">Durable, soft-touch synthetic grass for outdoor spaces, patios, and decor.</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-6">
+          <Link href="/grass-types" className="text-primary underline font-medium">View All Grass Types</Link>
+        </div>
+      </section>
+
+      {/* Use Cases */}
+      <section className="py-16 px-6">
+        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">Applications</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          {[
+            { title: 'Home & Garden', img: '/images/use-home.jpg' },
+            { title: 'Sports Fields', img: '/images/use-sports.jpg' },
+            { title: 'Balcony & Decor', img: '/images/use-decor.jpg' },
+          ].map(({ title, img }) => (
+            <div key={title} className="bg-white shadow rounded-lg overflow-hidden">
+              <img src={img} alt={title} className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h3 className="font-semibold text-lg">{title}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Why Choose Nurteks */}
+      <section className="py-16 px-6 bg-primary text-white">
+        <h2 className="text-3xl font-bold text-center mb-10">Why Choose Nurteks?</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-left">
+          {[
+            'Eco-Friendly & Non-Toxic',
+            '20+ Years of Global Expertise',
+            'UV & Heat Resistant',
+            'Professional Installation Support',
+          ].map((reason, i) => (
+            <div key={i} className="bg-white/10 p-4 rounded-md">
+              <h3 className="font-semibold text-lg">✓ {reason}</h3>
+              <p className="text-sm mt-1">We deliver unmatched performance, beauty, and durability.</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="py-16 px-6 bg-white">
+        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">From Our Blog</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-gray-50 p-4 shadow rounded-lg">
+              <img src={`/images/blog${i}.jpg`} alt={`Blog ${i}`} className="rounded mb-4 h-40 w-full object-cover" />
+              <h3 className="font-semibold text-lg mb-2">How to Choose Artificial Grass ({i})</h3>
+              <p className="text-sm text-gray-600 mb-2">
+                Tips and tricks for selecting the right grass for your space, budget, and weather.
+              </p>
+              <Link href={`/blog/post-${i}`} className="text-primary text-sm underline">Read More</Link>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link href="/blog" className="text-primary underline font-medium">View All Blog Posts</Link>
+        </div>
+      </section>
+
+      {/* Partners */}
+      <section className="py-16 px-6 bg-gray-100">
+        <h2 className="text-3xl font-bold text-center mb-10">Our Global Partners</h2>
+        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-center">
+          {[1, 2, 3, 4].map(i => (
+            <img key={i} src={`/images/brand${i}.png`} alt={`Partner ${i}`} className="h-12 object-contain grayscale hover:grayscale-0 transition" />
+          ))}
+        </div>
+      </section>
+
+      {/* Final Contact CTA */}
+      <section className="bg-primary text-white py-20 px-4 text-center">
+        <h2 className="text-3xl font-bold mb-4">Let's Bring Green to Morocco</h2>
+        <p className="mb-6">Contact us for franchise opportunities, wholesale orders, or installation support.</p>
+        <Link href="/contact" className="bg-white text-primary px-6 py-3 rounded hover:bg-gray-200 transition">
+          Contact Now
+        </Link>
+      </section>
+    </GuestLayout>
+  )
+}
