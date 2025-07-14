@@ -51,7 +51,7 @@ Route::get('/grass/{slug}', [GrassController::class, 'show'])->name('grass.show'
 /////////////////////////////////////
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('posts', PostController::class);
     Route::resource('grass-types', GrassTypeController::class);
@@ -67,4 +67,4 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 // });
 
 
-// require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';

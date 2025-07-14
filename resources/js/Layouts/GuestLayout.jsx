@@ -7,7 +7,7 @@ export default function GuestLayout({ children }) {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Artificial Grass', href: '/grass-types' },
+    { name: 'Artificial Grass', href: '/grass' },
     { name: 'About', href: '/about' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
@@ -16,58 +16,65 @@ export default function GuestLayout({ children }) {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="bg-white shadow sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-primary">Nurteks Morocco</Link>
+      <header className="bg-white shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-extrabold text-[#15803D] tracking-tight">
+          Nurteks Morocco
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-6">
+          {navLinks.map(link => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`text-sm font-semibold transition duration-200 hover:text-[#15803D] ${
+                url === link.href ? "text-[#15803D]" : "text-gray-700"
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden focus:outline-none text-gray-800"
+        >
+          {open ? (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {open && (
+        <div className="md:hidden px-4 pb-4 bg-white border-t">
+          <nav className="flex flex-col space-y-3">
             {navLinks.map(link => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium hover:text-primary transition ${
-                  url === link.href ? 'text-primary' : 'text-gray-700'
-                }`}
+                className={`text-sm font-medium transition duration-150 ${
+                  url === link.href ? "text-[#15803D]" : "text-gray-700"
+                } hover:text-[#15803D]`}
+                onClick={() => setOpen(false)}
               >
                 {link.name}
               </Link>
             ))}
           </nav>
-
-          {/* Mobile Menu Toggle */}
-          <button onClick={() => setOpen(!open)} className="md:hidden focus:outline-none">
-            <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {open ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
-              )}
-            </svg>
-          </button>
         </div>
-
-        {/* Mobile Navigation Menu */}
-        {open && (
-          <div className="md:hidden px-4 pb-4 bg-white border-t">
-            <nav className="flex flex-col space-y-2">
-              {navLinks.map(link => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-sm font-medium hover:text-primary ${
-                    url === link.href ? 'text-primary' : 'text-gray-700'
-                  }`}
-                  onClick={() => setOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
-      </header>
-
+      )}
+    </header>
       {/* Main Content */}
       <main className="flex-1">{children}</main>
 
