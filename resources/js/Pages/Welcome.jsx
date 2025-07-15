@@ -1,29 +1,79 @@
 import GuestLayout from '@/Layouts/GuestLayout'
 import { Link } from '@inertiajs/react'
 import { Mail } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
+
+const slides = [
+  '/storage/images/hero0.png',
+  '/storage/images/hero1.png',
+  '/storage/images/hero2.png',
+  '/storage/images/hero3.png',
+]
 
 export default function Welcome() {
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((i) => (i + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
   return (
     <GuestLayout>
       {/* Hero Section */}
-      <section className="relative bg-[url('/images/')] bg-cover bg-center text-white">
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
-            Artificial Grass, Reimagined for Morocco
-          </h1>
-          <p className="text-lg md:text-xl mb-6">
-            Premium quality from a global leader. Perfect for homes, sports fields, and urban decor.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-[#15803D] hover:bg-green-700 text-white font-medium px-6 py-3 rounded-md transition"
+      <section className="relative min-h-screen overflow-hidden">
+        {/* Background Carousel */}
+        <div className="absolute inset-0">
+          <AnimatePresence>
+            <motion.img
+              key={slides[index]}
+              src={slides[index]}
+              alt="Hero Background"
+              className="w-full h-full object-cover absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-6 py-40 text-center text-white">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-4xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow"
           >
-            Contact Us
-          </Link>
+            Premium Artificial Grass <br className="hidden sm:inline" />
+            <span className="text-[#15803D]">Tailored for Morocco</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="text-lg md:text-xl text-gray-200 mb-8"
+          >
+            Transform your outdoor spaces with durability, beauty, and sustainability.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <Link
+              href="/contact"
+              className="bg-[#15803D] hover:bg-green-700 text-white px-8 py-3 rounded-md font-semibold shadow transition"
+            >
+              Contact Us
+            </Link>
+          </motion.div>
         </div>
       </section>
-
       {/* About Section */}
       <section className="py-20 px-6 text-center">
         <div className="max-w-3xl mx-auto">
@@ -153,7 +203,7 @@ export default function Welcome() {
 
         {/* WhatsApp Button */}
         <a
-          href="https://wa.me/905537398298" 
+          href="https://wa.me/905537398298"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-[#25D366] hover:bg-green-600 text-white p-3 rounded-full shadow-lg transition duration-300"
@@ -168,7 +218,7 @@ export default function Welcome() {
           </svg>
         </a>
 
-        
+
         {/* Email Button */}
         <a
           href="mailto:abdesslam.mouloud@nurtekse.com.tr"
